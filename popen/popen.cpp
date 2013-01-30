@@ -18,22 +18,20 @@ NS_IMPL_ISUPPORTS1(POPEN, nsIPopen)
 NS_IMETHODIMP
 POPEN::Popen(const char *s, char **_retval)
 {
-   char sTemp[1024] = {NULL};
+   char sTemp[4096] = {NULL};
    FILE   *pPipe;
-   *_retval = (char*)NS_Alloc(sizeof(char)*40000);
-   strcpy_s(*_retval, 1024, sTemp);
+   *_retval = (char*)NS_Alloc(sizeof(char)*400000);
+   strcpy_s(*_retval, 4096, sTemp);
    if( (pPipe = _popen( s, "rt" )) == NULL )
       exit( 1 );
    while( !feof( pPipe ) )
    {
       if( fgets(  sTemp, 1024, pPipe ) != NULL )
-		strcat_s( *_retval, 1024 , sTemp ); 
+		strcat_s( *_retval, 4096 , sTemp ); 
    }
    printf( "\nProcess returned %d\n", _pclose( pPipe ) );
   return NS_OK;
 }
-
-
 
 NS_GENERIC_FACTORY_CONSTRUCTOR(POPEN)
 
