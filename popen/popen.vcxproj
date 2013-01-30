@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nsIPopen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="nsIPopen.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="popen.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{734FFB7D-21A9-4D5F-8B51-3EB4D4B64B3D}</ProjectGuid>
+    <RootNamespace>popen</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>nsPopen</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>
+    </CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <PreBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XP_WIN;XP_WIN32;XPCOM_GLUE;XPCOM_GLUE_USE_NSPR;MOZILLA_STRICT_API;MOZILLA_PRIVATE_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\xulrunner-sdk\include;..\..\xulrunner-sdk\include\nspr;C:\Program Files\Microsoft Visual Studio 11.0\VC\atlmfc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
+      <AdditionalLibraryDirectories>..\..\xulrunner-sdk\sdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;Advapi32.lib;xpcomglue_s.lib;xpcom.lib;nspr4.lib;mozalloc.lib;xul.lib;setupapi.lib;mozjs.lib;PortableDeviceGUIDs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(IntDir)$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+    </Link>
+    <PreBuildEvent>
+      <Command>..\..\xulrunner-sdk\sdk\bin\header.py -I..\..\xulrunner-sdk\idl -o nsIPopen.h nsIPopen.idl
+..\..\xulrunner-sdk\sdk\bin\typelib.py -I..\..\xulrunner-sdk\idl  -o nsIPopen.xpt nsIPopen.idl</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Using pyxpidl / Generating C++ headers / Generating typelibs</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(ProjectName).dll "C:\siragonplay\aosu\mtp-xpcom\TestApp\components\popen.dll"
+copy "nsIPopen.xpt" "C:\siragonplay\aosu\mtp-xpcom\TestApp\components\popen.xpt"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy $(OutDir)$(ProjectName).dll </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

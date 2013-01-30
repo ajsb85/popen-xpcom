@@ -1,0 +1,11 @@
+#include "nsISupports.idl"
+
+[scriptable, uuid(b408a710-9cad-43c6-b261-3f687f5c9f8b)]
+interface nsIPopen : nsISupports
+{
+  /**
+   * This interface return de verbose output.
+   */
+
+    string popen(in string s);
+};
